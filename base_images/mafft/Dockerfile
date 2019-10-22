@@ -8,14 +8,12 @@ ARG ncpus=4
 ARG prefix=/opt/mafft
 ARG setup_env=${prefix}/setup_env
 
-ARG app_version="7.429"
+ENV app_version 7.429
 
 WORKDIR ${downloads}
 
-
-RUN \curl https://mafft.cbrc.jp/alignment/software/mafft-7.429-without-extensions-src.tgz | \
+RUN \curl https://mafft.cbrc.jp/alignment/software/mafft-${app_version}-without-extensions-src.tgz | \
     tar xz
-
 
 WORKDIR mafft-${app_version}-without-extensions/core
 

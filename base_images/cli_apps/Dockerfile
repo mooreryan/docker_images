@@ -1,4 +1,4 @@
-FROM base_images_ruby:2.6.5
+FROM mooreryan/base_images_ruby:2.6.5
 
 LABEL maintainer="moorer@udel.edu"
 

@@ -1,4 +1,4 @@
-FROM base_images_rya_c:0.2.3
+FROM mooreryan/base_images_rya_c:0.2.3
 
 LABEL maintainer="moorer@udel.edu"
 

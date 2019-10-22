@@ -1,7 +1,7 @@
-FROM base_images_mafft:7.429 as MAFFT
-FROM base_images_clustalo:1.2.4 as CLUSTALO
+FROM mooreryan/base_images_mafft:7.429 as MAFFT
+FROM mooreryan/base_images_clustalo:1.2.4 as CLUSTALO
 
-FROM base_images_ruby:2.6.5
+FROM mooreryan/base_images_ruby:2.6.5
 
 LABEL maintainer="moorer@udel.edu"
 
