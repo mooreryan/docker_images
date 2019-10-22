@@ -32,3 +32,5 @@ COPY --from=builder ${prefix} ${prefix}
 
 # Setup the env in case you want to use this image directly.
 RUN bash ${setup_env}
+
+WORKDIR ${prefix}
