@@ -1,4 +1,4 @@
-FROM buildpack-deps:buster
+FROM buildpack-deps:buster AS builder
 
 LABEL maintainer="moorer@udel.edu"
 
@@ -13,22 +13,22 @@ ENV app_version 7.429
 WORKDIR ${downloads}
 
 RUN \curl https://mafft.cbrc.jp/alignment/software/mafft-${app_version}-without-extensions-src.tgz | \
-    tar xz
-
-WORKDIR mafft-${app_version}-without-extensions/core
-
-# Need to adjust Makefile "by hand".
-RUN sed -ibackup 's~PREFIX = /usr/local~PREFIX = /opt/mafft~' Makefile
-
-RUN make -j${ncpus} && \
-    make install
-
-WORKDIR ${home}
-
-RUN rm -r ${downloads}
-
-RUN printf "ln -sf ${prefix}/bin/* /usr/bin\n" > \
+    tar xz && \
+    cd mafft-${app_version}-without-extensions/core && \
+    sed -ibackup 's~PREFIX = /usr/local~PREFIX = /opt/mafft~' Makefile && \
+    make -j${ncpus} && \
+    make install && \
+    cd ${home} && \
+    rm -r ${downloads} && \
+    printf "ln -sf ${prefix}/bin/* /usr/local/bin\n" > \
            ${prefix}/setup_env
+
+FROM debian:buster-slim
+
+ARG prefix=/opt/mafft
+ARG setup_env=${prefix}/setup_env
+
+COPY --from=builder ${prefix} ${prefix}
 
 # Setup the env in case you want to use this image directly.
 RUN bash ${setup_env}
