@@ -1,6 +1,6 @@
 ## -*- docker-image-name: "base_images_sample_seqs:0.1.5" -*-
 
-FROM base_images_rya_c:0.2.3 AS rya_c-builder
+FROM mooreryan/base_images_rya_c:0.2.3 AS rya_c-builder
 
 FROM buildpack-deps:buster AS sample_seqs-builder
 
