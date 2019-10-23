@@ -31,12 +31,18 @@ RUN rm -r ${downloads}
 RUN printf "ln -sf ${prefix}/bin/* /usr/local/bin\n" > \
            ${prefix}/setup_env
 
+RUN ls /lib/x86_64-linux-gnu
+RUN ldd ${prefix}/bin/mmseqs
+
 FROM debian:buster
 
 ARG prefix=/opt/MMseqs2
 ARG setup_env=${prefix}/setup_env
 
 COPY --from=builder ${prefix} ${prefix}
+# debian:buster doesn't have this lib.
+COPY --from=builder /usr/lib/x86_64-linux-gnu/libgomp.so.1 \
+                    /usr/lib/x86_64-linux-gnu/libgomp.so.1
 
 # Setup the env in case you want to use this image directly.
 RUN bash ${setup_env}
