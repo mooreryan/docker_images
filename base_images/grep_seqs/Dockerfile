@@ -1,4 +1,4 @@
-## -*- docker-image-name: "base_images_grep_seqs:4a729a2" -*-
+## -*- docker-image-name: "base_images_grep_seqs:4a729a2-2" -*-
 
 FROM buildpack-deps:buster AS builder
 
