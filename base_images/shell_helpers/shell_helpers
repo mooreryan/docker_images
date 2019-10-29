@@ -1,0 +1,22 @@
+
+
+# Nice command prompt
+export PS1="[\u: \w] -> "
+
+# Scroll up and down through history
+bind '\"\e[A\": history-search-backward'
+bind '\"\e[B\": history-search-forward'
+
+# Some aliases
+alias ls='ls --color'
+alias l='ls --color'
+alias ls1='ls -1 --color'
+alias ls2='ls -1 --color'
+alias lsl='ls -lah --color'
+alias lst='ls -laht --color'
+alias lss='ls -lahS --color'
+alias b='cd ..'
+alias bb='cd ../..'
+alias bbb='cd ../../..'
+alias bbbb='cd ../../../..'
+alias count='egrep -c "^>"'
