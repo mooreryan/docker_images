@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Only add to the Renviron if the dir has something in it.
+if [ "$(ls -A /opt/ggrepel)" ]; then
+    printf "\n\nR_LIBS_USER=\"\${R_LIBS_USER}\":/opt/ggrepel\n\n" >> \
+           /usr/local/lib/R/etc/Renviron
+fi
+

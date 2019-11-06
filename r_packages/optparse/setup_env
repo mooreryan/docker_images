@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Only add to the Renviron if the dir has something in it.
+if [ "$(ls -A /opt/optparse)" ]; then
+    printf "\n\nR_LIBS_USER=\"\${R_LIBS_USER}\":/opt/optparse\n\n" >> \
+           /usr/local/lib/R/etc/Renviron
+fi
