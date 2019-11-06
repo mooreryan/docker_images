@@ -1,0 +1,10 @@
+#!/bin/bash
+
+img="$1"
+tag="$2"
+
+build_img=$(echo $img | tr '[:upper:]' '[:lower:]')
+
+docker tag ${build_img}:${tag} mooreryan/${build_img}:${tag} && \
+    docker login && \
+    docker push mooreryan/${build_img}:${tag}

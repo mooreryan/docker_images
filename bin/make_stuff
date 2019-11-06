@@ -1,0 +1,4 @@
+for pa in {ade4,ape,compositions,doParallel,doSNOW,dplyr,fastcluster,foreach,ggplot2,ggrepel,gplots,gridExtra,hexbin,igraph,knitr,magrittr,mvnfast,parallel,peakRAM,profvis,propr,rbenchmark,RcppEigen,Rcpp,RcppParallel,robCompositions,scales,testthat,tictoc,VennDiagram,zCompositions}; do ./bin/r_package_skeleton.rb $pa; done
+
+
+for pa in {ade4,ape,compositions,doParallel,doSNOW,dplyr,fastcluster,foreach,ggplot2,ggrepel,gplots,gridExtra,hexbin,igraph,knitr,magrittr,mvnfast,parallel,peakRAM,profvis,propr,rbenchmark,RcppEigen,Rcpp,RcppParallel,robCompositions,scales,testthat,tictoc,VennDiagram,zCompositions}; do ./bin/build_docker r_packages_${pa} rocker-verse-3.6.1 r_packages/$pa; done

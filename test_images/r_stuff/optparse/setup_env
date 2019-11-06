@@ -1,0 +1,4 @@
+#!/bin/bash
+
+printf "\n\nR_LIBS_USER=\"\${R_LIBS_USER}\":/opt/optparse\n\n" >> \
+       /usr/local/lib/R/etc/Renviron

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+img="$1"
+tag="$2"
+
+docker tag ${img}:${tag} mooreryan/${img}:${tag} && \
+    docker login && \
+    docker push mooreryan ${img}:${tag}

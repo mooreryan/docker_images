@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [[ $# -ne 3 ]]; then
+    >&2 echo "usage: ./bin/build_docker img_name img_tag dockerfile_dir"
+    exit 1
+fi
+
+img="$1"
+tag="$2"
+dir="$3"
+
+# Check for the image first.
+docker images | rg "${img} *${tag}"
+if [[ $? -eq 0 ]]; then
+    >&2 echo "WARNING -- image tag combination already exist!"
+    read -p "Should I proceed? (y/n) " proceed
+
+    if [[ "$proceed" = "n" ]]; then
+        >&2 echo "Aborting!"
+        exit 2
+    fi
+fi
+
+
+build_img=$(echo $img | tr '[:upper:]' '[:lower:]')
+docker build -t ${build_img}:${tag} "${dir}" && \
+    docker tag ${build_img}:${tag} mooreryan/${build_img}:${tag} && \
+    docker login && \
+    docker push mooreryan/${build_img}:${tag} && \
+    tput bel
