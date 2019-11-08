@@ -1,4 +1,4 @@
-## -*- docker-image-name: "code_and_coffee_r_stuff:1.0" -*-
+## -*- docker-image-name: "code_and_coffee_r_stuff_20191106:1.0" -*-
 
 # Need this to fit models
 FROM mooreryan/r_packages_caret:rocker-verse-3.6.1 AS builder-caret
