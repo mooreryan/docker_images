@@ -1,0 +1,27 @@
+## -*- docker-image-name: "base_images_mmseqs2:ebb16f3" -*-
+
+# Based on the following Dockerfile: https://github.com/soedinglab/plass/blob/c4f7b2392f26c71e8c596466a3e620297c748fa7/Dockerfile
+
+FROM buildpack-deps:buster AS builder
+
+LABEL maintainer="moorer@udel.edu"
+
+ARG home=/root
+ARG downloads=${home}/downloads
+ARG ncpus=4
+ARG prefix=/opt/MMseqs2
+ARG setup_env=${prefix}/setup_env
+
+RUN apt-get update && apt-get install -y cmake
+
+WORKDIR ${prefix}
+
+ADD . .
+
+WORKDIR ${prefix}/build_sse
+RUN cmake -DHAVE_MPI=0 -DHAVE_TESTS=0 -DHAVE_SSE4_1=1 -DCMAKE_BUILD_TYPE=Release ..
+RUN make -j $(nproc --all)
+
+WORKDIR ${prefix}/build_avx
+RUN cmake -DHAVE_MPI=0 -DHAVE_TESTS=0 -DHAVE_AVX2=1 -DCMAKE_BUILD_TYPE=Release ..
+RUN make -j $(nproc --all)
